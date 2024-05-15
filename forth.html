@@ -24,6 +24,8 @@
     </header>
 
     <div class="container">
+        <button onclick="fetchData()">Fetch Data</button>
+        <button onclick="removeData()">Remove Data</button>
         <table>
             <thead>
                 <tr>
@@ -42,6 +44,44 @@
         </table>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        function fetchData() {
+            // This is just a dummy data fetching function
+            const dummyData = [
+                { amazonPrice: "$100", amazonDelivery: "2 days", ottoPrice: "$90", ottoDelivery: "3 days" },
+                { amazonPrice: "$120", amazonDelivery: "1 day", ottoPrice: "$100", ottoDelivery: "2 days" },
+                { amazonPrice: "$80", amazonDelivery: "3 days", ottoPrice: "$85", ottoDelivery: "4 days" }
+            ];
+
+            const resultBody = document.getElementById('resultBody');
+
+            // Clear previous data
+            resultBody.innerHTML = '';
+
+            // Populate table with fetched data
+            dummyData.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.amazonPrice}</td>
+                    <td>${item.amazonDelivery}</td>
+                    <td>${item.ottoPrice}</td>
+                    <td>${item.ottoDelivery}</td>
+                    <td><button onclick="removeRow(this)">Remove</button></td>
+                `;
+                resultBody.appendChild(row);
+            });
+        }
+
+        function removeData() {
+            const resultBody = document.getElementById('resultBody');
+            // Remove all rows from the table
+            resultBody.innerHTML = '';
+        }
+
+        function removeRow(button) {
+            // Remove the row corresponding to the clicked button
+            button.parentNode.parentNode.remove();
+        }
+    </script>
 </body>
 </html>
